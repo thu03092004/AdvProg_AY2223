@@ -59,12 +59,12 @@ void Game::snakeMoveTo(Position pos) {
 	// END CODE HERE
 	if (getCellType(pos) == CELL_OFF_BOARD || getCellType(pos) == CELL_SNAKE){
 		status = GAME_OVER;
+		return;
 	}
 	if (getCellType(pos) == CELL_CHERRY){
 		score++;
 		snake.eatCherry();
 		addCherry();
-		return;
 	}
 	setCellType(pos, CELL_SNAKE);
 }
@@ -116,10 +116,9 @@ void Game::processUserInput(Direction direction)
 bool Game::canChange(Direction current, Direction next) const {
 	if (current == UP || current == DOWN) {
 		if (next == UP || next == DOWN) return 0;
+		return 1;
 	}
-	if (current == LEFT || current == RIGHT) {
-		if (next == LEFT || current == RIGHT) return 0;
-	}
+	if (next == LEFT || current == RIGHT) return 0;
 	return 1;
 }
 
